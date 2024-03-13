@@ -1,0 +1,29 @@
+<center>
+    <h1> TODO List </h1>
+    
+    <a href ="/" >BACK TO BLOGS</a><br/>
+
+    <h3> To Search </h3>
+    <form action="{% url 'search_bar' %}" method='GET'>
+        <input type='text' name='search_bar'> 
+        <button type="submit"> Search </button> <br>
+    </form>
+    
+    <h3> To update </h3>
+    <form method="POST" action=''> 
+        
+        {{form.title}} 
+        <input type='submit' name='list'>
+        {% csrf_token %}
+    </form>
+    
+    {% for task in tasks %}
+    <div>
+        <a href="{% url 'update_task' task.id %}">Update</a>
+    
+        <a href="{% url 'delete_task' task.id %}">Delete</a>
+        <p>{{task}}</p>
+        </div>
+    
+    {% endfor %}   
+    </center>

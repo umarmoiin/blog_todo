@@ -2,7 +2,20 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<h3> Enter the blog </h3>
+<form method="POST" action=''>
+  {{form.as_p}}
+  <button> Submit </button>
+  {% csrf_token %}
+</form>
+
+<a href ="tasks/list" >TODO List</a><br/>
+
 <style>
+
+
+
 * {
   box-sizing: border-box;
 }
@@ -48,19 +61,31 @@ body {
 <body>
 
 <div class="header">
-  <h2>Tomi's Blog</h2>
+  <a href=" "><h3>Blogs FOR Everyone</h3></a>
 </div>
 
 <div class="row">
   <div class="leftcolumn">
-    {% for post in posts reversed %}
+    
+    {% for i in posts reversed %}
     <div class="card">
-      <a style="text-decoration: none; color: black;" href="/post/{{post.id}}" >
-        <h2>{{post.title}}</h2>
-        <h5>{{post.created_at}}</h5>
-        <p>{{post.body|truncatewords:20}}</p>
+      
+      <a style="text-decoration: none; color: red;" href="{% url 'delete_task' i.id %}">Delete
+          <img src="https://cdn-icons-png.flaticon.com/512/3515/3515498.png" alt="Trash Can" style="width: 16px; height: 16px;">
+        </a>
+        <a style="text-decoration: none; color: green;" href="{% url 'update_blog' i.id %}">Update</a>  
+      <!--form method ="POST" action=''>
+        <input type="Submit" name="Confirm">   
+        {% csrf_token %}
+        
+      </form> -->
+      <a style="text-decoration: none; color: black;" href="/post/{{i.id}}">
+        <h2>{{i.title}}</h2>
+        <h5>{{i.created_at}}</h5>
+        <p>{{i.body|truncatewords:20}}</p>
       </a>
     </div>
+    
     {% endfor %}
   </div>
 </div>
